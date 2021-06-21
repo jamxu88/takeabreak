@@ -33,12 +33,12 @@ async function main() {
     console.log(new Date())
     bopen("http://localhost:8899")
     active = true;
-    await delay(3000);
+    await delay(120000);
     console.log("Ending break at")
     console.log(new Date())
     active = false;
     io.emit('close')
-    await delay(2400000);
+    await delay(1800000);
     main()
 }
 
