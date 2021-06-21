@@ -19,22 +19,25 @@ app.use(express.static(__dirname));
 
 io.on('connection', async (socket) => {
     socket.on('disconnect', function(){
-        console.log('dcopen', active, unf)
         if(active && !socket.connected) bopen("http://localhost:8899");
     });
     socket.on('unfocused', () => {
         unf = true;
-        console.log('ufopen', active, unf)
         if(active && !socket.connected) bopen("http://localhost:8899");
         unf = false;
     })
 })
 
 async function main() {
+    console.log("Starting break at")
+    console.log(new Date())
     bopen("http://localhost:8899")
     active = true;
-    await delay(300000);
+    await delay(3000);
+    console.log("Ending break at")
+    console.log(new Date())
     active = false;
+    io.emit('close')
     await delay(2400000);
     main()
 }

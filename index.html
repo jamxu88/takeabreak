@@ -27,6 +27,7 @@ div {
         window.close()
       }
   }, 100);
+  socket.on('close', () => {window.close()})
 </script>
 </body>
 
