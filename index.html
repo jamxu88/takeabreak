@@ -1,0 +1,34 @@
+<style>
+    span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+div {
+  height: 100%;
+  line-height: 100px;
+  text-align: center;
+}
+</style>
+<body>
+  <div>
+    <span>
+        <h1 style="text-align:center">hi go take a break now</h1>
+    </span>
+</div>
+<script src="/socket.io.js"></script>
+<script>
+  var socket = io('http://localhost:8899');
+  var interval = setInterval(async function() {
+      var focused = document.hasFocus();
+      if(!focused) {
+        clearInterval(interval);
+        socket.emit("unfocused")
+        window.close()
+      }
+  }, 100);
+</script>
+</body>
+
+
+
