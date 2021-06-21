@@ -7,6 +7,8 @@ const delay = require('delay');
 
 var active = false;
 var unf = false;
+var stime;
+var tleft;
 
 http.listen(8899, async () => {
 })
@@ -30,11 +32,19 @@ io.on('connection', async (socket) => {
 
 async function main() {
     console.log("Starting break at")
-    console.log(new Date())
+    stime = new Date()
+    console.log(stime);
+    tleft = 120
+    var intv = setInterval(function x() {
+        console.log(tleft)
+        io.emit('time',tleft)
+        tleft -= 1;
+        if(tleft == 0) clearInterval(intv)
+    },1000)
     bopen("http://localhost:8899")
     active = true;
     await delay(120000);
-    console.log("Ending break at")
+    console.log("Break ended at")
     console.log(new Date())
     active = false;
     io.emit('close')

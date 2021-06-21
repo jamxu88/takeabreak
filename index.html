@@ -1,19 +1,25 @@
 <style>
-    span {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
-}
-div {
-  height: 100%;
-  line-height: 100px;
-  text-align: center;
-}
+  @font-face {
+            font-family: 'Century Gothic';
+            src: url('.\\Century\\Gothic.ttf');
+        }
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+  }
+  div {
+    font-family: Century Gothic;
+    height: 100%;
+    line-height: 100px;
+    text-align: center;
+  }
 </style>
 <body>
   <div>
     <span>
         <h1 style="text-align:center">hi go take a break now</h1>
+        <h1 style="text-align:center" id="timer"></h1>
     </span>
 </div>
 <script src="/socket.io.js"></script>
@@ -28,6 +34,9 @@ div {
       }
   }, 100);
   socket.on('close', () => {window.close()})
+  socket.on('time', (t) => {
+    document.getElementById('timer').innerText = "Time left: " + t + " seconds.";
+  })
 </script>
 </body>
 
